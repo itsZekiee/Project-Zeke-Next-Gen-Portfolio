@@ -12,22 +12,23 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Niel Ezequiel Dungao | Developer Portfolio",
+  title: "Z Developers Ph | ZEKE Portfolio",
   description:
-    "Full-Stack Developer, Mobile App Developer, and Cybersecurity Enthusiast. 4th Year BS Information Technology student with 6 years of front-end development experience.",
+    "Portfolio of Niel Ezequiel Dungao (ZEKE) — 4th year BS Information Technology student, front-end developer, full-stack builder, and cybersecurity competitor.",
   keywords: [
+    "Z Developers Ph",
+    "ZEKE",
     "Niel Ezequiel Dungao",
+    "Front-End Developer",
     "Full-Stack Developer",
-    "React",
-    "Next.js",
-    "Portfolio",
     "Cybersecurity",
+    "Next.js Portfolio",
   ],
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -36,4 +37,3 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-

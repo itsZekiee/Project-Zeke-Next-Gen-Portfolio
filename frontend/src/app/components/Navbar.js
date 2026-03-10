@@ -10,6 +10,7 @@ const navLinks = [
   { name: "Skills", href: "#skills" },
   { name: "Experience", href: "#experience" },
   { name: "Projects", href: "#projects" },
+  { name: "Badges", href: "#certifications" },
   { name: "Contact", href: "#contact" },
 ];
 
@@ -19,7 +20,7 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -27,8 +28,7 @@ export default function Navbar() {
   const handleNavClick = (e, href) => {
     e.preventDefault();
     setMobileOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -38,29 +38,37 @@ export default function Navbar() {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/80 dark:bg-black/80 backdrop-blur-xl shadow-lg shadow-blue-500/5 border-b border-blue-500/10"
+          ? "glass-strong shadow-2xl shadow-blue-500/10 border-b border-blue-500/10"
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Logo */}
+      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-6">
         <motion.a
           href="#home"
           onClick={(e) => handleNavClick(e, "#home")}
-          className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent"
-          whileHover={{ scale: 1.05 }}
+          className="flex items-center gap-3"
+          whileHover={{ scale: 1.03 }}
         >
-          {"<NED />"}
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-cyan-400 text-white font-bold shadow-lg shadow-blue-500/25">
+            Z
+          </span>
+          <span className="hidden sm:flex flex-col leading-tight">
+            <span className="text-sm uppercase tracking-[0.25em] text-blue-500 font-semibold">
+              Studio
+            </span>
+            <span className="text-base md:text-lg font-bold text-slate-900 dark:text-white">
+              Z Developers Ph
+            </span>
+          </span>
         </motion.a>
 
-        {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-7">
           {navLinks.map((link) => (
             <motion.a
               key={link.name}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors relative group"
+              className="text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors relative group"
               whileHover={{ y: -2 }}
             >
               {link.name}
@@ -69,40 +77,41 @@ export default function Navbar() {
           ))}
           <motion.button
             onClick={toggleTheme}
-            className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors"
-            whileHover={{ scale: 1.1, rotate: 15 }}
-            whileTap={{ scale: 0.9 }}
+            aria-label="Toggle theme"
+            className="p-2.5 rounded-full bg-slate-200/70 dark:bg-slate-800/70 text-slate-700 dark:text-slate-200 hover:bg-blue-100 dark:hover:bg-blue-950/60 transition-colors"
+            whileHover={{ scale: 1.08, rotate: 12 }}
+            whileTap={{ scale: 0.94 }}
           >
             {theme === "dark" ? <HiSun size={18} /> : <HiMoon size={18} />}
           </motion.button>
         </div>
 
-        {/* Mobile Toggle */}
         <div className="flex md:hidden items-center gap-3">
           <motion.button
             onClick={toggleTheme}
-            className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300"
+            aria-label="Toggle theme"
+            className="p-2.5 rounded-full bg-slate-200/70 dark:bg-slate-800/70 text-slate-700 dark:text-slate-200"
             whileTap={{ scale: 0.9 }}
           >
             {theme === "dark" ? <HiSun size={18} /> : <HiMoon size={18} />}
           </motion.button>
           <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="p-2 text-gray-700 dark:text-gray-300"
+            onClick={() => setMobileOpen((open) => !open)}
+            aria-label="Toggle navigation"
+            className="p-2 text-slate-700 dark:text-slate-300"
           >
             {mobileOpen ? <HiX size={24} /> : <HiMenu size={24} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white/95 dark:bg-black/95 backdrop-blur-xl border-t border-blue-500/10"
+            className="md:hidden glass-strong border-t border-blue-500/10"
           >
             <div className="flex flex-col px-6 py-4 gap-4">
               {navLinks.map((link) => (
@@ -110,7 +119,7 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className="text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors font-medium"
+                  className="text-slate-700 dark:text-slate-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors font-medium"
                 >
                   {link.name}
                 </a>
@@ -122,4 +131,3 @@ export default function Navbar() {
     </motion.nav>
   );
 }
-
