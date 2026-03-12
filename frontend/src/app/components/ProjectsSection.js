@@ -31,7 +31,7 @@ const projects = [
             { name: "Tailwind CSS", icon: SiTailwindcss },
         ],
         github: "https://github.com/itsZekiee/Zeke-WebFolio.git",
-        live: null,
+        live: "https://zeke-web-folio.vercel.app",
         featured: true,
     },
     {
